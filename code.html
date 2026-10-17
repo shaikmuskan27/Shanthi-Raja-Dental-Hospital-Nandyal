@@ -15,6 +15,51 @@
 .animate-radar {
   animation: pulseRadar 2.2s infinite ease-out;
 }
+
+/* Typography Transition Moments & Motion */
+@keyframes textShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.text-shimmer {
+  background: linear-gradient(90deg, #bae6fd 0%, #ffffff 50%, #bae6fd 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 6s linear infinite;
+}
+
+.text-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.text-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-reveal-delay-1 { transition-delay: 0.12s; }
+.text-reveal-delay-2 { transition-delay: 0.24s; }
+.text-reveal-delay-3 { transition-delay: 0.36s; }
+
+.hover-glow-text {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-glow-text:hover {
+  color: #0284c7;
+  letter-spacing: 0.01em;
+}
+
+.hover-lift-phrase {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+.hover-lift-phrase:hover {
+  transform: translateY(-2px);
+  color: #38bdf8;
+}
 </style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface": "#191c1e", "outline-variant": "#c4c6ce", "inverse-on-surface": "#eff1f3", "tertiary-fixed": "#dce1ff", "tertiary-fixed-dim": "#b6c4ff", "secondary-container": "#95f8aa", "on-secondary": "#ffffff", "tertiary-container": "#001853", "on-secondary-fixed": "#00210b", "secondary-fixed-dim": "#79db90", "primary": "#00040e", "on-primary-fixed": "#091c34", "on-tertiary-fixed": "#00164e", "tertiary": "#000317", "navy-light": "#0f1f38", "on-surface-variant": "#44474d", "background": "#f7f9fb", "secondary-fixed": "#95f8aa", "on-secondary-container": "#007437", "on-secondary-fixed-variant": "#005225", "on-error-container": "#93000a", "text-muted": "#64748b", "primary-container": "#0b1e36", "surface-tint": "#4e5f7a", "inverse-primary": "#b6c7e7", "surface-container-lowest": "#ffffff", "secondary": "#006d33", "surface-container-highest": "#e0e3e5", "error": "#ba1a1a", "surface-container-low": "#f2f4f6", "surface-bright": "#f7f9fb", "surface-container": "#eceef0", "emerald-action": "#48a964", "surface-variant": "#e0e3e5", "outline": "#74777e", "surface-canvas": "#fcfdfe", "primary-fixed-dim": "#b6c7e7", "blue-accent": "#1e3a8a", "on-tertiary-fixed-variant": "#264191", "surface-container-high": "#e6e8ea", "on-primary-container": "#7586a3", "emerald-tint": "#eef8f2", "primary-fixed": "#d5e3ff", "on-primary-fixed-variant": "#364762", "emerald-soft": "#7eb36b", "blue-slate": "#334155", "surface-dim": "#d8dadc", "text-primary": "#0b1e36", "on-tertiary": "#ffffff", "error-container": "#ffdad6", "emerald-vibrant": "#52b788", "on-background": "#191c1e", "inverse-surface": "#2d3133", "on-tertiary-container": "#6981d5", "surface": "#f7f9fb", "surface-card": "#ffffff", "on-primary": "#ffffff", "on-error": "#ffffff", "navy-deep": "#0b1e36",
 "sky-subtle": "#f0f9ff",
 "sky-tint": "#e0f2fe",
@@ -194,18 +239,18 @@
   <div class="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 flex flex-col items-center text-center gap-4 sm:gap-6">
     
     <!-- Tag Pill -->
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white font-label-caps text-[11px] sm:text-[12px] uppercase tracking-wider shadow-sm">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white font-label-caps text-[11px] sm:text-[12px] uppercase tracking-wider shadow-sm transition-all duration-300 hover:bg-white/25">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span class="font-semibold text-white">Welcome to Shanthi Raja Dental</span>
+      <span id="hero-tag-text" class="font-semibold text-white transition-all duration-300">Welcome to Shanthi Raja Dental</span>
     </div>
 
-    <!-- Main Headline: "Where advanced dentistry meets genuine warmth." -->
-    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight sm:leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)] font-headline-lg">
-      Where advanced dentistry meets <span class="italic font-normal text-sky-300">genuine warmth.</span>
+    <!-- Main Headline: "Where advanced dentistry meets genuine warmth." with dynamic transition moments -->
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight sm:leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)] font-headline-lg text-reveal is-revealed">
+      Where advanced dentistry meets <span id="hero-dynamic-text" class="italic font-normal text-sky-300 inline-block transition-all duration-500 transform hover-lift-phrase cursor-pointer">genuine warmth.</span>
     </h1>
 
     <!-- Subheadline & Location -->
-    <p class="text-base sm:text-lg md:text-xl text-white/95 max-w-2xl font-medium leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.6)]">
+    <p class="text-base sm:text-lg md:text-xl text-white/95 max-w-2xl font-medium leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.6)] text-reveal text-reveal-delay-1 is-revealed">
       Quality dental care for Nandyal families. Comprehensive family care, painless root canals, orthodontics, and implants with a 4.7-star Google rating.
     </p>
 
@@ -300,12 +345,12 @@
 <!-- 2. Doctors & Practice Section -->
 <section id="specialists-section" class="px-margin-mobile py-space-xl bg-gradient-to-b from-sky-subtle/50 to-surface-container-low flex flex-col gap-space-lg scroll-mt-20">
 <div class="flex flex-col gap-1">
-<div class="flex items-center gap-2 text-azure-deep">
+<div class="flex items-center gap-2 text-azure-deep text-reveal">
 <span class="material-symbols-outlined text-[18px]">medical_services</span>
 <span class="font-label-caps text-label-caps uppercase tracking-wider font-semibold">Specialized Clinicians</span>
 </div>
-<h2 class="font-headline-sm text-headline-sm text-navy-deep font-semibold">Meet Our Specialist Doctors</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
+<h2 class="font-headline-sm text-headline-sm text-navy-deep font-semibold text-reveal text-reveal-delay-1 hover-glow-text">Meet Our Specialist Doctors</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-reveal text-reveal-delay-2">
         Personalized patient comfort meets clinical precision. Every treatment plan is thoroughly explained with zero fear.
       </p>
 </div>
@@ -321,7 +366,7 @@
   <!-- Info at RIGHT -->
   <div class="min-[500px]:w-7/12 min-[640px]:w-3/5 p-5 min-[500px]:p-6 sm:p-7 flex flex-col justify-center gap-2.5">
     <div class="flex items-baseline justify-between gap-2">
-      <h3 class="font-title-md text-[18px] sm:text-[20px] text-navy-deep font-bold">Dr. Balusa Rajeev</h3>
+      <h3 class="font-title-md text-[18px] sm:text-[20px] text-navy-deep font-bold hover-glow-text cursor-pointer transition-all">Dr. Balusa Rajeev</h3>
       <span class="font-label-caps text-[11px] px-2.5 py-0.5 rounded-full bg-sky-tint text-azure-deep font-bold border border-azure-brand/30">M.D.S.</span>
     </div>
     <p class="font-body-sm text-[13px] sm:text-[14px] text-azure-deep font-semibold leading-snug">
@@ -348,7 +393,7 @@
   <!-- Info at LEFT -->
   <div class="order-2 min-[500px]:order-1 min-[500px]:w-7/12 min-[640px]:w-3/5 p-5 min-[500px]:p-6 sm:p-7 flex flex-col justify-center gap-2.5">
     <div class="flex items-baseline justify-between gap-2">
-      <h3 class="font-title-md text-[18px] sm:text-[20px] text-navy-deep font-bold">Dr. K. Prasanthi Lakshmi Devi</h3>
+      <h3 class="font-title-md text-[18px] sm:text-[20px] text-navy-deep font-bold hover-glow-text cursor-pointer transition-all">Dr. K. Prasanthi Lakshmi Devi</h3>
       <span class="font-label-caps text-[11px] px-2.5 py-0.5 rounded-full bg-sky-tint text-azure-deep font-bold border border-azure-brand/30">Dip. Ortho</span>
     </div>
     <p class="font-body-sm text-[13px] sm:text-[14px] text-azure-deep font-semibold leading-snug">
@@ -414,12 +459,12 @@
 <!-- 3. Comprehensive Services Grid -->
 <section id="services-section" class="px-margin-mobile py-space-xl flex flex-col gap-space-lg scroll-mt-20">
 <div class="flex flex-col gap-1">
-<div class="flex items-center gap-2 text-azure-deep">
+<div class="flex items-center gap-2 text-azure-deep text-reveal">
 <span class="material-symbols-outlined text-[18px]">dentistry</span>
 <span class="font-label-caps text-label-caps uppercase tracking-wider font-semibold">Clinical Solutions</span>
 </div>
-<h2 class="font-headline-sm text-headline-sm text-navy-deep font-semibold">Comprehensive Dental Services</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
+<h2 class="font-headline-sm text-headline-sm text-navy-deep font-semibold text-reveal text-reveal-delay-1 hover-glow-text">Comprehensive Dental Services</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-reveal text-reveal-delay-2">
         From routine cleanings to specialist root canals and smile makeovers, all under one roof.
       </p>
 </div>
@@ -651,11 +696,11 @@
 <!-- 4. Patient Information, Hours & Location -->
 <section class="px-margin-mobile py-space-xl bg-sky-subtle/50 flex flex-col gap-space-md">
 <div class="flex flex-col gap-1">
-<div class="flex items-center gap-2 text-azure-deep">
+<div class="flex items-center gap-2 text-azure-deep text-reveal">
 <span class="material-symbols-outlined text-[18px]">access_time</span>
 <span class="font-label-caps text-label-caps uppercase tracking-wider font-semibold">Visit Our Hospital</span>
 </div>
-<h2 class="font-headline-sm text-headline-sm text-navy-deep font-semibold">Hours &amp; Landmark Location</h2>
+<h2 class="font-headline-sm text-headline-sm text-navy-deep font-semibold text-reveal text-reveal-delay-1 hover-glow-text">Hours &amp; Landmark Location</h2>
 </div>
 <!-- Working Hours Card (Highlighted 7-Day Openness) -->
 <div class="p-space-md rounded-2xl bg-surface-card border border-sky-soft/50 shadow-[0_4px_20px_rgba(2,132,199,0.06)] flex flex-col gap-space-sm">
@@ -692,7 +737,7 @@
 <div class="flex items-start gap-space-sm">
 <span class="material-symbols-outlined text-azure-deep text-[24px] shrink-0 mt-0.5">place</span>
 <div class="flex flex-col">
-<span class="font-title-md text-[16px] text-navy-deep font-bold">Shanthi Raja Dental Hospital</span>
+<span class="font-title-md text-[16px] text-navy-deep font-bold hover-glow-text cursor-pointer transition-colors">Shanthi Raja Dental Hospital</span>
 <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
               Doctors Complex, opp. HP Petrol Bunk, Priyanka Nagar, Farooq Nagar, Srinivasa Nagar, Nandyala, Andhra Pradesh 518501
             </p>
@@ -720,13 +765,13 @@
   <div class="absolute bottom-0 -left-20 w-72 h-72 rounded-full bg-sky-tint/50 blur-3xl pointer-events-none -z-10"></div>
 
   <div class="flex flex-col items-center text-center gap-1.5">
-    <span class="font-label-caps text-label-caps uppercase tracking-wider text-azure-deep font-bold">COMMON QUESTIONS</span>
-    <h2 class="font-headline-sm text-headline-sm sm:text-headline-md text-navy-deep font-semibold">Frequently Asked Questions</h2>
+    <span class="font-label-caps text-label-caps uppercase tracking-wider text-azure-deep font-bold text-reveal">COMMON QUESTIONS</span>
+    <h2 class="font-headline-sm text-headline-sm sm:text-headline-md text-navy-deep font-semibold text-reveal text-reveal-delay-1 hover-glow-text">Frequently Asked Questions</h2>
   </div>
 
   <div class="flex flex-col gap-3.5 max-w-lg mx-auto w-full">
     <details class="group rounded-2xl bg-surface-card border border-sky-soft/50 shadow-[0_4px_20px_rgba(2,132,199,0.06)] overflow-hidden transition-all duration-300">
-      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold">
+      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold hover:text-azure-deep transition-colors">
         <span class="">What insurance plans does Shanthi Raja Dental accept?</span>
         <span class="material-symbols-outlined text-azure-deep text-[22px] transition-transform duration-300 group-open:rotate-180 shrink-0 ml-2">expand_more</span>
       </summary>
@@ -736,7 +781,7 @@
     </details>
 
     <details class="group rounded-2xl bg-surface-card border border-sky-soft/50 shadow-[0_4px_20px_rgba(2,132,199,0.06)] overflow-hidden transition-all duration-300">
-      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold">
+      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold hover:text-azure-deep transition-colors">
         <span class="">Are you accepting new patients in Nandyal, AP?</span>
         <span class="material-symbols-outlined text-azure-deep text-[22px] transition-transform duration-300 group-open:rotate-180 shrink-0 ml-2">expand_more</span>
       </summary>
@@ -746,7 +791,7 @@
     </details>
 
     <details class="group rounded-2xl bg-surface-card border border-sky-soft/50 shadow-[0_4px_20px_rgba(2,132,199,0.06)] overflow-hidden transition-all duration-300">
-      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold">
+      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold hover:text-azure-deep transition-colors">
         <span class="">Do you offer evening or weekend dental appointments?</span>
         <span class="material-symbols-outlined text-azure-deep text-[22px] transition-transform duration-300 group-open:rotate-180 shrink-0 ml-2">expand_more</span>
       </summary>
@@ -756,7 +801,7 @@
     </details>
 
     <details class="group rounded-2xl bg-surface-card border border-sky-soft/50 shadow-[0_4px_20px_rgba(2,132,199,0.06)] overflow-hidden transition-all duration-300">
-      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold">
+      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold hover:text-azure-deep transition-colors">
         <span class="">Are root canal treatments painful at Shanthi Raja Dental?</span>
         <span class="material-symbols-outlined text-azure-deep text-[22px] transition-transform duration-300 group-open:rotate-180 shrink-0 ml-2">expand_more</span>
       </summary>
@@ -766,7 +811,7 @@
     </details>
 
     <details class="group rounded-2xl bg-surface-card border border-sky-soft/50 shadow-[0_4px_20px_rgba(2,132,199,0.06)] overflow-hidden transition-all duration-300">
-      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold">
+      <summary class="flex items-center justify-between p-space-md cursor-pointer list-none select-none text-navy-deep font-title-md text-[16px] leading-snug font-semibold hover:text-azure-deep transition-colors">
         <span class="">Where is the clinic located in Nandyal?</span>
         <span class="material-symbols-outlined text-azure-deep text-[22px] transition-transform duration-300 group-open:rotate-180 shrink-0 ml-2">expand_more</span>
       </summary>
@@ -777,12 +822,12 @@
   </div>
 </section><section class="px-margin-mobile py-space-xl flex flex-col gap-space-md scroll-mt-24" id="booking-section">
 <div class="flex flex-col gap-1">
-<div class="flex items-center gap-2 text-azure-deep">
+<div class="flex items-center gap-2 text-azure-deep text-reveal">
 <span class="material-symbols-outlined text-[18px]">event_available</span>
 <span class="font-label-caps text-label-caps uppercase tracking-wider font-semibold">Priority Reservation</span>
 </div>
-<h2 class="font-headline-sm text-headline-sm text-navy-deep font-semibold">Schedule Your Visit</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
+<h2 class="font-headline-sm text-headline-sm text-navy-deep font-semibold text-reveal text-reveal-delay-1 hover-glow-text">Schedule Your Visit</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-reveal text-reveal-delay-2">
         Reserve your preferred slot instantly. Our front desk will confirm via WhatsApp or Phone within 30 minutes.
       </p>
 </div>
@@ -1538,6 +1583,85 @@
         'What are the clinic hours in Nandyal today?',
         'We are open all 7 days from 10:00 AM to 9:00 PM at Doctors Complex, opposite HP Petrol Bunk. Would you like me to book Dr. Balusa Rajeev or Dr. Prasanthi?'
       );
+    }
+
+    // 7. Typography Motion & Dynamic Text Transitions
+    let dynamicTextIndex = 0;
+    const dynamicPhrases = [
+      "genuine warmth.",
+      "gentle precision.",
+      "painless care.",
+      "lifelong smiles.",
+      "zero dental fear."
+    ];
+
+    function cycleHeroDynamicText() {
+      const el = document.getElementById('hero-dynamic-text');
+      if (!el) return;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(-8px) scale(0.96)';
+      setTimeout(() => {
+        dynamicTextIndex = (dynamicTextIndex + 1) % dynamicPhrases.length;
+        el.textContent = dynamicPhrases[dynamicTextIndex];
+        el.style.transform = 'translateY(10px) scale(0.96)';
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0) scale(1)';
+        }, 40);
+      }, 350);
+    }
+    setInterval(cycleHeroDynamicText, 3200);
+
+    let tagIndex = 0;
+    const dynamicTags = [
+      "Welcome to Shanthi Raja Dental",
+      "★ 4.7 Rated • 700+ Google Reviews",
+      "Open 7 Days a Week • 10 AM – 9 PM",
+      "Painless Single-Sitting Root Canals",
+      "Zero Wait-Time Scheduled Visits"
+    ];
+
+    function cycleHeroTag() {
+      const el = document.getElementById('hero-tag-text');
+      if (!el) return;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(-6px)';
+      setTimeout(() => {
+        tagIndex = (tagIndex + 1) % dynamicTags.length;
+        el.textContent = dynamicTags[tagIndex];
+        el.style.transform = 'translateY(6px)';
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 40);
+      }, 300);
+    }
+    setInterval(cycleHeroTag, 4200);
+
+    function initScrollTextReveal() {
+      const revealElements = document.querySelectorAll('.text-reveal');
+      if (!('IntersectionObserver' in window)) {
+        revealElements.forEach(el => el.classList.add('is-revealed'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -30px 0px'
+      });
+
+      revealElements.forEach(el => observer.observe(el));
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollTextReveal);
+    } else {
+      initScrollTextReveal();
     }
 </script>
 </body></html>
